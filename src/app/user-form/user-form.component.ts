@@ -4,7 +4,7 @@ import {User} from '../user-form/user';
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.css']
+  styleUrls: ['./user-form.component.css','../sass/styles.scss']
 })
 export class UserFormComponent implements OnInit {
 

@@ -1,4 +1,4 @@
-
+import {ɵstringify} from "@angular/core";
 
 
 export class User {
@@ -7,11 +7,13 @@ export class User {
 
   public firstName: string;
   public lastName: string;
+  public login: string;
+  public password: string;
   public age: number;
   public Adresse?: string;
 
 
-  constructor(firstName: string, lastName: string, age: number, Adresse?: string) {
+  constructor(firstName: string, lastName: string, age: number, Adresse?: string, ) {
 
   }
 
