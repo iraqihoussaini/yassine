@@ -24,4 +24,14 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to app!');
   }));
+  it(`Test function sayHello`, async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app.sayHello()).toEqual('Hello World');
+  }));
+  it(`Test function sayHello(World)`, async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app.sayHello('World')).toEqual('Hello World');
+  }));
 });
