@@ -6,16 +6,19 @@ import {User} from '../user-form/user';
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.scss','../sass/styles.scss']
 })
-export class UserFormComponent implements OnInit {
+export class UserFormComponent  {
+  ages = [18,19,20,21,22,23,24,25,26,27,28,29,30];
 
-  model = new User('Yassine','Iraqi',27,'32 avenue');
+
+  model = new User('Yassine','Iraqi',27,'32 avenue', 33661181916,'admin','1234');
 
   submitted = false;
+  firstName1: any;
 
   onSubmit() { this.submitted = true; }
-  constructor() { }
+  get diagnostic() { return JSON.stringify(this.model); }
 
-  ngOnInit() {
+  newUser() {
+    this.model = new User('Yassine','Iraqi',27,'32 avenue', +3310101010,'admin','1234');
   }
-
 }

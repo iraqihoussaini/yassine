@@ -1,78 +1,112 @@
-<div class="container">
-  <div [hidden]="submitted">
-    <h1>User Form</h1>
-    <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+<div [hidden]="submitted" class="container">
+  <h2>FORMULAIRE D'INSCRIPTION</h2>
+  <form  (ngSubmit)="onSubmit()" #userForm="ngForm">
 
-      <div class="form-group">
-        <label for="firstName1">First Name</label>
-        <input type="text" class="form-control" id="firstName1"
-               required
-               [(ngModel)]="model.firstName" name="firstName"
-               #firstName="ngModel">
-        <div [hidden]="firstName.valid || firstName.pristine"
-             class="alert alert-danger">
-          First Name is required
+    <div class="form-group">
+      <label for="firstName">Prènom</label>
+      <input type="text" class="form-control" id="firstName"
+             required minlength="4" forbiddenName="bob"
+             [(ngModel)]="model.firstName" name="firstName"
+             #name="ngModel">
+
+
+      <div *ngIf="name.invalid && (name.dirty || name.touched)"
+           class="alert alert-danger">
+
+        <div *ngIf="name.errors.required">
+          champ obligatoire
         </div>
+        <div *ngIf="name.errors.minlength">
+          Le prenom doit comporter au moins 4 caractères.
+        </div>
+        <div *ngIf="name.errors.forbiddenName">
+          Name cannot be Bob.
+        </div>
+
       </div>
+      <label for="lastName">Nom</label>
+      <input type="text" class="form-control" id="lastName"
+             required
+             [(ngModel)]="model.lastName" name="lastName">
 
-
-
-      <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid">Submit</button>
-      <button type="button" class="btn btn-default" (click)="newUser(); userForm.reset()">New User</button>
-      <i>with</i> reset
-
-      &nbsp;&nbsp;
-      <button type="button" class="btn btn-default" (click)="newUser()">New User</button>
-      <i>without</i> reset
-
-      <!-- NOT SHOWN IN DOCS -->
-      <div>
-        <hr>
-        Name via form.controls = {{showFormControls(heroForm)}}
-      </div>
-      <!-- - -->
-    </form>
-  </div>
-
-  <div [hidden]="!submitted">
-    <h2>You submitted the following:</h2>
-    <div class="row">
-      <div class="col-xs-3">First name</div>
-      <div class="col-xs-9  pull-left">{{ model.firstName }}</div>
+      <label for="age">Age</label>
+      <select class="form-control" id="age"
+              required
+              [(ngModel)]="model.age" name="age">
+        <option *ngFor="let a of ages" [value]="a">{{a}}</option>
+      </select>
     </div>
-    <div class="row">
-      <div class="col-xs-3">Last </div>
-      <div class="col-xs-9 pull-left">{{ model.lastName }}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3">Power</div>
-      <div class="col-xs-9 pull-left">{{ model.age }}</div>
-    </div>
-    <br>
-    <button class="btn btn-primary" (click)="submitted=false">Edit</button>
-  </div>
-</div>
 
-<!-- ====================================================  -->
-<div>
-  <form>
+    <div class="form-group">
+      <label for="tel">Télephone</label>
+      <input type="text" class="form-control" id="tel"
+             required
+             [(ngModel)]="model.tel" name="tel">
+    </div>
 
-    <!-- ... all of the form ... -->
+
+    <div class="form-group">
+      <label for="adresse">Adresse</label>
+      <input type="text" class="form-control" id="adresse"
+             required
+             [(ngModel)]="model.adresse" name="adresse">
+    </div>
+
+    <div class="form-group">
+      <label for="login">Login</label>
+      <input type="text" class="form-control" id="login"
+             required
+             [(ngModel)]="model.login" name="login">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Mot de Passe</label>
+      <input type="text" class="form-control" id="password"
+             required
+             [(ngModel)]="model.password" name="password">
+    </div>
+
+
+    <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid">Valider</button>
+    <button type="button" class="btn btn-default" (click)="newUser(); userForm.reset()">Annuler</button>
 
   </form>
+  {{diagnostic}}
 </div>
 
-<!-- ====================================================  -->
-<hr>
-<style>
-  .no-style .ng-valid {
-    border-left: 1px  solid #CCC
-  }
 
-  .no-style .ng-invalid {
-    border-left: 1px  solid #CCC
-  }
-</style>
-
-
-
+<div [hidden]="!submitted">
+  <h2>Vous avez soumis ce qui suit:</h2>
+  <div class="row">
+    <div class="col-xs-3">Prenom</div>
+    <div class="col-xs-9  pull-left">{{ model.firstName }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Nom</div>
+    <div class="col-xs-9 pull-left">{{ model.lastName }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Age</div>
+    <div class="col-xs-9 pull-left">{{ model.age }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Telephone</div>
+    <div class="col-xs-9 pull-left">{{ model.tel }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Adresse</div>
+    <div class="col-xs-9 pull-left">{{ model.adresse }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Login</div>
+    <div class="col-xs-9 pull-left">{{ model.login }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Mot de passe</div>
+    <div class="col-xs-9 pull-left">{{ model.password }}</div>
+  </div>
+  <br>
+  <button class="btn btn-danger" (click)="submitted=false">Annuler</button>
+  <button class="btn btn-primary" (click)="submitted=false">Modifier</button>
+  <button class="btn btn-success" (click)="submitted=false">Enregistrer</button>
+</div>

@@ -10,11 +10,18 @@ export class User {
   public login: string;
   public password: string;
   public age: number;
-  public Adresse?: string;
+  public tel: number;
+  public adresse: string;
 
 
-  constructor(firstName: string, lastName: string, age: number, Adresse?: string, ) {
-
+  constructor(firstName: string, lastName: string, age: number, adresse: string, tel: number, login:string, password: string ) {
+  this.firstName=firstName;
+    this.lastName=lastName;
+    this.age=age;
+    this.adresse=adresse;
+    this.tel=tel;
+    this.login=login;
+    this.password=password;
   }
 
 
